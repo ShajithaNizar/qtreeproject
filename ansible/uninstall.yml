@@ -1,6 +1,6 @@
 ---
 - name: Software uninstallation
-  hosts: slave1
+  hosts: all
   tasks:
     - name: stop nginx service
       service:
