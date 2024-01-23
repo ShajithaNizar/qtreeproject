@@ -1,6 +1,7 @@
 ---
 - name: Software uninstallation
   hosts: all
+  become: yes
   tasks:
     - name: stop nginx service
       service:

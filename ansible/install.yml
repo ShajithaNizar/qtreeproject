@@ -1,6 +1,7 @@
 ---
 - name: Software installation
   hosts: all
+  become: yes
   tasks:
       - name: install nginx
         apt: 
