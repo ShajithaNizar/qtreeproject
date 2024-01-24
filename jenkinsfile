@@ -1,34 +1,37 @@
 pipeline {
-  agent any
-  environment {
-        GIT_REPO_URL = 'https://github.com/umeshqtree/project.git' //update repository
+    agent any
+    environment {
+        GIT_REPO_URL = 'https://github.com/umeshqtree/project.git'
         docker_dir = "/var/lib/jenkins/workspace/${params.Pipeline_name}/docker/"
     }
-  parameters {
-        string(name: "Pipeline_name", defaultValue: "", description: "enter pipeline name"),
+    parameters {
+        string(name: "Pipeline_name", defaultValue: "", description: "enter pipeline name")
+        string(name: "container_name", defaultValue: "", description: "enter image name")
         string(name: "image_name", defaultValue: "", description: "enter image name")
         string(name: "port_number", defaultValue: "", description: "enter port number")
         string(name: "network_name", defaultValue: "", description: "enter network name")
         string(name: "volume_name", defaultValue: "", description: "enter volume name")
     }
-  stages {
-    stage('Checkout SCM') {
-        steps {
-         // Checkout the code from your Git repository
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: env.GIT_REPO_URL]]])
-         }
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: env.GIT_REPO_URL]]])
+            }
         }
         stage('updating variables') {
-        steps {
-             dir("${env.docker_dir}"){
-               sh "
-               sudo sed -i -e "s/image_name/${params.iname}/g" docker-compose.yml
-               sudo sed -i -e "s/port_number/${params.pname}/g" docker-compose.yml
-               sudo sed -i -e "s/network_name/${params.nname}/g" docker-compose.yml
-               sudo sed -i -e "s/volume_name/${params.vname}/g" docker-compose.yml
-               "
-             }
-         }
+            steps {
+                dir("${env.docker_dir}") {
+                    script {
+                        sh """
+                            sudo sed -i -e 's/container_name/${params.container_name}/g' docker-compose.yml
+                            sudo sed -i -e 's/image_name/${params.image_name}/g' docker-compose.yml
+                            sudo sed -i -e 's/port_number/${params.port_number}/g' docker-compose.yml
+                            sudo sed -i -e 's/network_name/${params.network_name}/g' docker-compose.yml
+                            sudo sed -i -e 's/volume_name/${params.volume_name}/g' docker-compose.yml
+                        """
+                    }
+                }
+            }
         }
         stage('Execute the docker-compose file') {
             steps {
@@ -44,5 +47,5 @@ pipeline {
                 }
             }
         }
-}
+    }
 }
