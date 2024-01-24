@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-        GIT_REPO_URL = 'https://github.com/umeshqtree/qtree.git'
+        GIT_REPO_URL = 'https://github.com/umeshqtree/project.git'
         ANSIBLE_DIR = "/var/lib/jenkins/workspace/${params.Pipeline_name}/ansible/"
     }
   parameters {
