@@ -5,7 +5,7 @@ services: #it denotes container
     ports:
       - "port_number:80" 
     volumes:
-      - vname:/app-data 
+      - volume_name:/app-data 
     networks:
       - network_name
 networks:
