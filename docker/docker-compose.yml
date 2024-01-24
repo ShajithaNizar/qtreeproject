@@ -1,7 +1,7 @@
 version: '3'
-services:
+services: #it denotes container
   # Frontend
-  webserver:
+  webserver: #container-1 name
     image: nginx:latest
     ports:
       - "9001:80" #container:actual port number
@@ -10,7 +10,7 @@ services:
     networks:
       - qtree-network
   # Database
-  dbserver: #conatiner name
+  dbserver: #conatiner-2 name
     image: postgres:latest
     environment:
       POSTGRES_DB: mydb
@@ -26,5 +26,5 @@ networks:
   qtree-network: #network to name
     driver: bridge #network type
 volumes:
-  pg-data: #volume name
-  nginx-data: #volume name
+  pg-data: #volume-1 name
+  nginx-data: #volume-2 name
