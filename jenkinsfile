@@ -1,12 +1,16 @@
+Build a docker container using compose file from Jenkins pipeline
 pipeline {
   agent any
   environment {
-        GIT_REPO_URL = 'https://github.com/umeshqtree/project.git'
-        ANSIBLE_DIR = "/var/lib/jenkins/workspace/${params.Pipeline_name}/ansible/"
+        GIT_REPO_URL = 'https://github.com/umeshqtree/project.git' //update repository
+        docker_dir = "/var/lib/jenkins/workspace/${params.Pipeline_name}/docker/"
     }
   parameters {
         string(name: "Pipeline_name", defaultValue: "", description: "enter pipeline name")
-        choice(name: 'Ansible_Action', choices: ['install.yml', 'reboot.yml','patching.yml', 'uninstall.yml'], description: 'Select Terraform actions')
+        string(name: "iname", defaultValue: "", description: "enter image name")
+        string(name: "pname", defaultValue: "", description: "enter port number")
+        string(name: "nname", defaultValue: "", description: "enter network name")
+        string(name: "vname", defaultValue: "", description: "enter volume name")
     }
   stages {
     stage('Checkout SCM') {
@@ -15,17 +19,29 @@ pipeline {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: env.GIT_REPO_URL]]])
          }
         }
-        stage('Modify pem file permission') {
+        stage('updating variables') {
         steps {
-             dir("${env.ANSIBLE_DIR}"){
-          sh "sudo chmod 400 devops.pem" //update your pem file name
+             dir("${env.docker_dir}"){
+               sh "
+               sudo sed -i -e "s/iname/${params.iname}/g" docker-compose.yml
+               sudo sed -i -e "s/pname/${params.pname}/g" docker-compose.yml
+               sudo sed -i -e "s/pnname/${params.nname}/g" docker-compose.yml
+               sudo sed -i -e "s/vname/${params.vname}/g" docker-compose.yml
+               "
              }
          }
         }
-        stage('Execute the pipeline') {
+        stage('Execute the docker-compose file') {
             steps {
-                dir("${env.ANSIBLE_DIR}") {
-                    sh "sudo ansible-playbook -i host ${params.Ansible_Action}"
+                dir("${env.docker_dir}") {
+                    sh "sudo docker-compose up -d"
+                }
+            }
+        }
+        stage('After execution list containers') {
+            steps {
+                dir("${env.docker_dir}") {
+                    sh "sudo docker ps"
                 }
             }
         }
