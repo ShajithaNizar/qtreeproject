@@ -1,16 +1,15 @@
 version: '3'
 services: #it denotes container
-  # Frontend
-  webserver: #container-1 name
-    image: iname:latest  #iname=image-name
+  webserver: 
+    image: image_name:latest  
     ports:
-      - "pname:80" #pname=portnumber
+      - "port_number:80" 
     volumes:
-      - vname:/app-data #vname=volumename
+      - vname:/app-data 
     networks:
-      - nname
+      - network_name
 networks:
-  nname: #nname=network to name
-    driver: bridge #network type
+  network_name: 
+    driver: bridge 
 volumes:
-  vname: #vname
+  volume_name: 
