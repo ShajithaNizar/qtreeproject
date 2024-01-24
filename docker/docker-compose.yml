@@ -2,29 +2,15 @@ version: '3'
 services: #it denotes container
   # Frontend
   webserver: #container-1 name
-    image: nginx:latest
+    image: iname:latest  #iname=image-name
     ports:
-      - "9001:80" #container:actual port number
+      - "pname:80" #pname=portnumber
     volumes:
-      - nginx-data:/app-data #volume_name:mount_point
+      - vname:/app-data #vname=volumename
     networks:
-      - qtree-network
-  # Database
-  dbserver: #conatiner-2 name
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-    ports:
-      - "5000:5432" #container:actual port number
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    networks:
-      - qtree-network
+      - nname
 networks:
-  qtree-network: #network to name
+  nname: #nname=network to name
     driver: bridge #network type
 volumes:
-  pg-data: #volume-1 name
-  nginx-data: #volume-2 name
+  vname: #vname
