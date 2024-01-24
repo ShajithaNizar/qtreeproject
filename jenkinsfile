@@ -25,7 +25,7 @@ pipeline {
         stage('Execute the pipeline') {
             steps {
                 dir("${env.ANSIBLE_DIR}") {
-                    sh "ansible-playbook -i host ${params.Ansible_Action}"
+                    sh "sudo ansible-playbook -i host ${params.Ansible_Action}"
                 }
             }
         }
