@@ -1,0 +1,2 @@
+[ubuntu]
+192.0.5.79 ansible_user=ubuntu ansible_ssh_privatekey=myserverkey.pem
