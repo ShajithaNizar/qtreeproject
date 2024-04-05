@@ -2,11 +2,11 @@ pipeline {
   agent any
   environment {
         GIT_REPO_URL = 'https://github.com/ShajithaNizar/qtreeproject.git' //update repository
-        ANSIBLE_DIR = "/var/lib/jenkins/workspace/${params.Pipeline_name}/ansible/"
+        ANSIBLE_DIR = "/var/lib/jenkins/workspace/${params.Pipeline_name}/Ansible/"
     }
   parameters {
         string(name: "Pipeline_name", defaultValue: "", description: "enter pipeline name")
-        choice(name: 'Ansible_playbook', choices: ['install-nginx.yml','uninstall-nginx.yml', 'Reboot.yml','Kernal-upgrade.yml'], description: 'Select Terraform actions')
+        choice(name: 'Ansible_playbook', choices: ['Install-nginx.yml','Uninstall-nginx.yml', 'Reboot.yml','Kernal-upgrade.yml'], description: 'Select Terraform actions')
     }
   stages {
     stage('Checkout SCM') {
@@ -18,7 +18,7 @@ pipeline {
         stage('Modify pem file permission') {
         steps {
              dir("${env.ANSIBLE_DIR}"){
-          sh "sudo chmod 400 myserverkey.pem" //update your pem file name
+          sh "sudo chmod 400 myseverkey.pem" //update your pem file name
              }
          }
         }
@@ -31,4 +31,6 @@ pipeline {
         }
 }
 }
+
+
 
