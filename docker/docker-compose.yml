@@ -1,13 +1,13 @@
 version: '3'
 services: #it denotes container
   container_name: 
-    image: image_name:latest  
+    image: nginx:latest  
     ports:
       - "8050:80" 
     volumes:
-      - volume_name:/app-data 
+      - data:/app-data 
     networks:
-      - network_name
+      - qtree
 networks:
   network_name: 
     driver: bridge 
