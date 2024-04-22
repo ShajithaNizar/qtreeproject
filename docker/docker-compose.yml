@@ -9,7 +9,7 @@ services: #it denotes container
     networks:
       - qtree
 networks:
-  network_name: 
+  qtree: 
     driver: bridge 
 volumes:
-  volume_name: 
+  data: 
