@@ -12,5 +12,4 @@ networks:
   qtree: 
     driver: bridge 
 volumes:
-  data: 
-  
+  data:
