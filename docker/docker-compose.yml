@@ -1,6 +1,6 @@
 version: '3'
 services: #it denotes container
-  qtree_1: 
+  qtree_2: 
     image: ubuntu:latest  
     ports:
       - "8050:80" 
