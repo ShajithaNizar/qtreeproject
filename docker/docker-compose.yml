@@ -1,7 +1,7 @@
 version: '3'
 services: #it denotes container
-  container_name: 
-    image: nginx:latest  
+  qtree_1: 
+    image: ubuntu:latest  
     ports:
       - "8050:80" 
     volumes:
