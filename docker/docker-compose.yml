@@ -1,9 +1,9 @@
 version: '3'
 services: #it denotes container
-  qtreel: 
+  new_container: 
     image: nginx:latest  
     ports:
-      - "8086:80" 
+      - "8088:80" 
     volumes:
       - data:/app-data 
     networks:
