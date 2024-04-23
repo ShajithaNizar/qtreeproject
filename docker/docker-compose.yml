@@ -1,9 +1,9 @@
 version: '3'
 services: #it denotes container
-  qtrr1: 
+  qtree: 
     image: nginx:latest  
     ports:
-      - "8081:80" 
+      - "8082:80" 
     volumes:
       - data:/app-data 
     networks:
