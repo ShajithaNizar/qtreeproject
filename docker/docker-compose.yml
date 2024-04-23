@@ -1,6 +1,6 @@
 version: '3'
 services: #it denotes container
-  container_name: 
+  qtrr1: 
     image: nginx:latest  
     ports:
       - "8081:80" 
