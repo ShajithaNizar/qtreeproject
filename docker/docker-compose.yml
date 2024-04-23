@@ -1,9 +1,9 @@
 version: '3'
 services: #it denotes container
-  new_container: 
+  new_cont: 
     image: nginx:latest  
     ports:
-      - "8088:80" 
+      - "80880:80" 
     volumes:
       - data:/app-data 
     networks:
