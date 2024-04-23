@@ -3,7 +3,7 @@ services: #it denotes container
   container_name: 
     image: image_name:latest  
     ports:
-      - "port:80" 
+      - "8081:80" 
     volumes:
       - data:/app-data 
     networks:
